@@ -1,6 +1,6 @@
 <div class="container">
 	<div class="panel-body">
-		<table>
+		<table class="table table-striped" *ngIf="films">
 			<tr>
 				<th>Film Id</th>
 				<th>Title</th>
@@ -9,17 +9,15 @@
 				<th>Author</th>
 				<th>Date</th>
 				<th>Description</th>
-				<th>Author</th>
 			</tr>
-			<tr *ngFor="let f of films.embedded.films">
-				<td>{{f.Id}}</td>
-				<td>{{f.Id}}</td>
-				<td>{{f.Id}}</td>
-				<td>{{f.Id}}</td>
-				<td>{{f.Id}}</td>
-				<td>{{f.Id}}</td>
-				<td>{{f.Id}}</td>
-				<td>{{f.Id}}</td>
+			<tr *ngFor="let f of films">
+				<td>{{f.id}}</td>
+				<td>{{f.titre}}</td>
+				<td>{{f.duree}}</td>
+				<td>{{f.categorie}}</td>
+				<td>{{f.realisateur}}</td>
+				<td>{{f.dateSortie}}</td>
+				<td>{{f.description}}</td>
 			</tr>
 		</table>
 	</div>

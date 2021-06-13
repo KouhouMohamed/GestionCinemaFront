@@ -32,4 +32,7 @@ export class AuthService {
     }));
      //return logged;
    }
+   getFilms(mypage:int, mylimit:int)(
+   return this.this.httpClient.get("http://localhost:8080/api/film/all?page="+mypage+"&limit="+mylimit)
+   )
 }

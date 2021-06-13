@@ -1,11 +1,10 @@
+<!--
 <div class="reddit-body">
     <div class="container">
         <div class="row">
             <hr />
             <div class="col-md-9">
-                <!-- Display Posts-->
                 <div class="row post" *ngFor="let post of posts$">
-                    <!-- Section to Display Votes-->
                     <div class="col-md-1">
                         <div class="d-flex flex-column votebox">
                             <div class="p-2">
@@ -17,7 +16,6 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Section to Display Post Information-->
                     <div class="col-md-11">
                         <span class="subreddit-info">
                             <span class="subreddit-text"><a class="posturl" routerLink="">{{post.subredditName}}</a></span>
@@ -48,3 +46,54 @@
         </div>
     </div>
 </div>
+-->
+<!-- A grey horizontal navbar that becomes vertical on small screens
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+         
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Search By
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" >Cinemas</a></li>
+              <li><a class="dropdown-item" href="#">Film</a></li>
+              <li><a class="dropdown-item" href="#">Categories</a></li>
+              <li><a class="dropdown-item" href="#">Author</a></li>
+              <li><hr class="dropdown-divider"></li>
+            </ul>
+          </li>
+         
+        </ul>
+        <form class="d-flex" >
+            <select class="form-select" aria-label="Default select example">
+                <option selected>Search By </option>
+                <option value="1">Title</option>
+                <option value="2">Category</option>
+                <option value="3">Author</option>
+            </select>
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+-->
+
+          <form class="d-flex" >
+              <select class="form-select" aria-label="Default select example">
+                  <option selected>Search By </option>
+                  <option value="1">Title</option>
+                  <option value="2">Category</option>
+                  <option value="3">Author</option>
+              </select>
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+          </form>
+        
+<router-outlet>
+
+</router-outlet>

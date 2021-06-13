@@ -21,12 +21,14 @@
           </span>
       </a>
   </div>
-  <div class="flex-grow float-right">
+  <div *ngIf="isLoggedIn$ | async" class="flex-grow float-right">
       <a routerLink="/login" class="float-right login mr-2">Login</a>
       <a routerLink="/signup" class="float-right signup mr-2">Sign up</a>
   </div>
 </nav>
-<router-outlet></router-outlet>
+<router-outlet>
+
+</router-outlet>
 <!--
 <header>
 

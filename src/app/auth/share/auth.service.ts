@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { SignupRequest } from '../signup/signup.request';
-import { Observable } from 'rxjs';
+import { Of, Observable } from 'rxjs';
 import { LoginRequest } from '../login/login.request';
 import { LoginResponse } from '../login/login.response';
 import { LocalStorageService } from 'ngx-webstorage';
@@ -12,9 +12,11 @@ import { map, catchError } from 'rxjs/operators';
 })
 export class AuthService {
 
-  constructor(private httpClient: HttpClient,
-    private localStorage: LocalStorageService) {
+  logged:boolean;
 
+  constructor(private httpClient: HttpClient,
+    private localStorage: LocalStorageService,  ) {
+        this.logged=false;
    }
    signup(signupRequest: SignupRequest) : Observable<any>{
      return this.httpClient.post('http://localhost:8080/api/auth/signup',signupRequest,{responseType:'text'});
@@ -28,5 +30,6 @@ export class AuthService {
 
       return true;
     }));
+     //return logged;
    }
 }

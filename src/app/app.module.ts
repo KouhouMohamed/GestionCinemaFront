@@ -13,6 +13,8 @@ import { TestComponent } from './auth/test/test.component';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './home/home.component';
+import { FooterComponent } from './footer/footer.component';
+import { FilmComponent } from './get/film/film.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +24,8 @@ import { HomeComponent } from './home/home.component';
     LoginComponent,
     TestComponent,
     HomeComponent,
+    FooterComponent,
+    FilmComponent,
   ],
   imports: [
     BrowserModule,

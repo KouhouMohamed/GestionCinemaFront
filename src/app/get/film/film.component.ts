@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '/auth/share/auth.service';
+import { AuthService } from 'src/app/auth/share/auth.service';
 
 @Component({
   selector: 'app-film',
@@ -11,7 +11,9 @@ export class FilmComponent implements OnInit {
 
    films;
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService) {
+    this.films = this.authService.films;
+   }
 
 
   ngOnInit(): void {

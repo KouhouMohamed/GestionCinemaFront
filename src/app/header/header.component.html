@@ -1,4 +1,4 @@
-<nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+<nav class="navbar  navbar-expand-lg navbar-light bg-light">
   <div class="flex-grow-1">
       <a aria-label="Home" class="logo" routerLink="/">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" class="reddit-icon-svg" id="Layer_1" data-name="Layer 1" viewBox="0 0 512 512" width="512" height="512">
@@ -21,14 +21,25 @@
           </span>
       </a>
   </div>
-  <div *ngIf="isLoggedIn$ | async" class="flex-grow float-right">
-      <a routerLink="/login" class="float-right login mr-2">Login</a>
-      <a routerLink="/signup" class="float-right signup mr-2">Sign up</a>
+  <div class="flex-grow float-right">
+    <div *ngIf="!isLogged">
+        <a routerLink="/login" class="float-right login mr-2">Login</a>
+        <a routerLink="/signup" class="float-right signup mr-2">Sign up</a>
+    </div>
+    <form *ngIf="isLogged" class="d-flex form" [formGroup]="headerForm" (ngSubmit)="getFilms()">
+      
+      <select class="form-select selector" aria-label="Default select example" [formControlName]="'selector'">
+           <option selected>Search By </option>
+          <option value="1">Title</option>
+          <option value="2">Category</option>
+          <option value="3">Author</option>
+      </select>
+    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" [formControlName]="'search'">
+    <button class="btn btn-outline-success" type="submit" routerLink="/films">Search</button>
+  </form>
   </div>
 </nav>
-<router-outlet>
 
-</router-outlet>
 <!--
 <header>
 

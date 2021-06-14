@@ -46,3 +46,9 @@ header{
 .signup:hover{
   opacity: 0.6;
 }
+.form{
+  padding: 5px;
+}
+.selector{
+  margin-right: 5px;
+}

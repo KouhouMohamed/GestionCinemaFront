@@ -6,11 +6,14 @@
                 <div class="card-header" style="text-align: center;"><h4>Login</h4></div>
                 <div class="card-body">
                     <form [formGroup]="loginForm" (ngSubmit)="login()">
+                        <div class="login-failed" *ngIf='this.isError'>
+                             <p class="login-failed-text">Login Failed. Please check your credentials and try again.</p>   
+                        </div>
                         <div class="form-group row">
                             <label for="user_name" class="col-md-4 col-form-label text-md-right">Email</label>
                             <div class="col-md-6">
                                 <input type="text" id="email" class="form-control" [formControlName]="'email'" name="user_name" required autofocus />
-                                <span class="error" *ngIf="!loginForm.get('email')!.valid && loginForm.get('email')!.touched">
+                                <span class="error" *ngIf="(!loginForm.get('email')!.valid && loginForm.get('email')!.touched) || this.isError">
                                     * enter a valid Email
                                 </span>
                             </div>
@@ -19,7 +22,7 @@
                             <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
                             <div class="col-md-6">
                                 <input type="password" id="password" class="form-control" [formControlName]="'password'" name="password" required />
-                                <span class="error" *ngIf="!loginForm.get('password')!.valid && loginForm.get('password')!.touched">
+                                <span class="error" *ngIf="(!loginForm.get('password')!.valid && loginForm.get('password')!.touched) || this.isError">
                                     * enter a valid Password
                                 </span>
                             </div>
@@ -29,12 +32,8 @@
                             <button type="submit" class="login">
                                 Login
                             </button>
-                            <span style="padding-left: 15px;">New to SpringReddit? <a routerLink="/signup">SIGN UP</a></span>
+                            
                         </span>
-                        
-                        <div class="login-failed" *ngIf='this.isError'>
-                             <p class="login-failed-text">Login Failed. Please check your credentials and try again.</p>   
-                        </div>
                       
                     </form>
                 </div>

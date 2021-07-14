@@ -5,13 +5,15 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { TestComponent } from './auth/test/test.component';
-import { FilmComponent } from './get/film/film.component';
+import { UsersComponent } from './get/users/users.component';
+import{ HomeComponent } from './home/home.component';
 
 const routes: Routes = [
   {path:"login", component:LoginComponent},
   {path:"signup", component:SignupComponent},
-  {path:"films", component:FilmComponent},
-  {path:"", component:AppComponent},
+  {path:"users", component:UsersComponent},
+  {path:"home", component:HomeComponent},
+  {path:"", component:LoginComponent},
   
 ];
 

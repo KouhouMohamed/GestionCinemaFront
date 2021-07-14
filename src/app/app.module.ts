@@ -15,6 +15,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './home/home.component';
 import { FooterComponent } from './footer/footer.component';
 import { FilmComponent } from './get/film/film.component';
+import { UsersComponent } from './get/users/users.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { FilmComponent } from './get/film/film.component';
     HomeComponent,
     FooterComponent,
     FilmComponent,
+    UsersComponent,
   ],
   imports: [
     BrowserModule,

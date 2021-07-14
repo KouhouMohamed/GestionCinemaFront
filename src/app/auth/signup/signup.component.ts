@@ -15,28 +15,36 @@ export class SignupComponent implements OnInit {
  // private authService: AuthService;
   constructor(private authService: AuthService,private router: Router ,private toastr: ToastrService) {
     this.signupResquest = {
-      username:'',
-      email:'',
-      password:''
+    first_name: '',
+    last_name: '',
+    email: '',
+    password:'',
+    profile_image: '',
     }
    }
 
   ngOnInit() {
     this.signupForm = new FormGroup({
-      username: new FormControl('' ,Validators.required),
+      first_name: new FormControl('' ,Validators.required),
+      last_name: new FormControl('' ,Validators.required),
       email: new FormControl('' ,[Validators.required, Validators.email]),
       password: new FormControl('' ,Validators.required),
+      profile_image: new FormControl('' ,Validators.required),
     });
   }
   signup(){
-    this.signupResquest.username = this.signupForm.get('username')?.value;
+    this.signupResquest.first_name = this.signupForm.get('first_name')?.value;
+    this.signupResquest.last_name = this.signupForm.get('last_name')?.value;
     this.signupResquest.email = this.signupForm.get('email')?.value;
     this.signupResquest.password = this.signupForm.get('password')?.value;
+    this.signupResquest.profile_image = this.signupForm.get('profile_image')?.value;
     
     this.authService.signup(this.signupResquest)
     .subscribe(() => {
+      this.toastr.success('Signup Successfil');
       this.router.navigate(['/login'],
-      { queryParams: { registered: 'true'}});},
+      { queryParams: { registered: 'true'}});
+    },
       () => {
         this.toastr.error('registration error please try again');
       }

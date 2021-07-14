@@ -6,68 +6,77 @@ import { LoginRequest } from '../login/login.request';
 import { LoginResponse } from '../login/login.response';
 import { LocalStorageService } from 'ngx-webstorage';
 import { map, catchError } from 'rxjs/operators';
+import { Output, EventEmitter } from '@angular/core';
+
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class AuthService {
 
-  logged:boolean;
+   localhost = "http://127.0.0.1:5000/";
+  @Output() loggedIn: EventEmitter<boolean> = new EventEmitter();
+  imLogged:boolean;
   films;
   constructor(private httpClient: HttpClient,
     private localStorage: LocalStorageService,  ) {
-        this.logged=false;
-        this.films = 
-          [
-            {
-                 "id":1,
-                 "titre":"Ajafrar",
-                 "duree":1.5,
-                 "categorie":"comidy",
-                 "realisateur":"Ahmed Ntama",
-                 "dateSortie":"12/02/2021",
-                 "description":"This is an amazigh film" 
-            }
-          ]
-        
+    this.loggedIn.emit(false);
+    this.imLogged=false; 
+
    }
    signup(signupRequest: SignupRequest) : Observable<any>{
-     return this.httpClient.post('http://localhost:8080/api/auth/signup',signupRequest,{responseType:'text'});
-   }
-   login(loginRequest:LoginRequest): Observable<boolean>{
-     return this.httpClient.post<LoginResponse>('http://localhost:8080/api/auth/login',
-     loginRequest).pipe( map(data => {
-      this.localStorage.store('username',data.username);
-      this.localStorage.store('enable',data.enable);
-      this.localStorage.store('correct',data.correct);
+     var res= this.httpClient.post(this.localhost+'register',signupRequest,{responseType:'json'});
+     console.log('result')
+     console.log(res)
+   return res;
+    }
 
-      return true;
-    }));
+    logout(){
+      
+      this.localStorage.store('first_name',"");
+      this.localStorage.store('last_name',"");
+      this.localStorage.store('email',"");
+      this.localStorage.store('profile_image',"");
+      this.loggedIn.emit(false);
+      this.imLogged=false;
+    }
+
+   login(loginRequest:LoginRequest): Observable<boolean>{
+     /*
+    var res = this.httpClient.get<LoginResponse>('http://127.0.0.1:5000/login/')
+    */
+
+    return this.httpClient.post<LoginResponse>(this.localhost+'login/',
+       loginRequest).pipe( map(data => {
+           if(data.email){
+             console.log(data)
+             this.localStorage.store('first_name',data.first_name);
+              this.localStorage.store('last_name',data.last_name);
+              this.localStorage.store('email',data.email);
+              this.localStorage.store('profile_image',data.profile_image);
+              this.loggedIn.emit(true);
+              this.imLogged=true;
+              return true;
+           }
+           else{
+             return false;
+           }
+        }
+    ));
      //return logged;
    }
-   getFilms(mypage, mylimit){
-    this.httpClient.get("http://localhost:8080/api/film/all?page="+mypage+"&limit="+mylimit).subscribe(data =>{
-      this.films=data;
-    });
-    return this.httpClient.get("http://localhost:8080/api/film/all?page="+mypage+"&limit="+mylimit)
-  }
 
-   getFilmsByTitle(title,mypage, mylimit){
-    this.httpClient.get("http://localhost:8080/api/film/all?page="+mypage+"&limit="+mylimit).subscribe(data =>{
-      this.films=data;
-    });
-      return this.httpClient.get("http://localhost:8080/api/film/all?page="+mypage+"&limit="+mylimit)
-    }
-    getFilmsByCategory(category,mypage, mylimit){
-      this.httpClient.get("http://localhost:8080/api/film/all?page="+mypage+"&limit="+mylimit).subscribe(data =>{
-      this.films=data;
-    });
-      return this.httpClient.get("http://localhost:8080/api/film/all?page="+mypage+"&limit="+mylimit)
-    }
-    getFilmsByAuthor(author,mypage, mylimit){
-      this.httpClient.get("http://localhost:8080/api/film/all?page="+mypage+"&limit="+mylimit).subscribe(data =>{
-      this.films=data;
-    });
-      return this.httpClient.get("http://localhost:8080/api/film/all?page="+mypage+"&limit="+mylimit)
-    }
+  isLoggedIn(): boolean {
+    return this.imLogged;
+  }
+  getUsers(page){
+    return this.httpClient.get(this.localhost+'user?page='+page);
+  }
+  getUserAddess(userId){
+    return this.httpClient.get(this.localhost+'address/user/'+userId);
+  }
+  userBlock(userId){
+   return this.httpClient.put(this.localhost+'user/block'+userId,null); 
+  }
 }

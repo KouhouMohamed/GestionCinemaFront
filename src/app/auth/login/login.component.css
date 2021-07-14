@@ -3,19 +3,22 @@
 }
 
 .login-failed{
+    background-color: #DC143C;
+    border-color: #DC143C;
     text-align: center;
     margin: auto;
     margin-top: 10px;
-    border: 2px solid black;
     width: 65%;    
-    background-color: red;
 }
 
 .login-failed-text{
+    
+    color: #FFFFFF;
     text-align: center;
-    margin-top: 5px;
+    margin: 5px;
     font-weight: bold;    
     color: aliceblue;
+    border-radius: 4px;
 }
 
 .login {

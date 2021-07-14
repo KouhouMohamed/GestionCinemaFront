@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
 
     this.activatedRouter.queryParams
     .subscribe(params => {
-      this.toastr.success('Signup Successfil');
+      
       this.registerSuccessMessage = 'Please activate your account before you Login !';
     });
   }
@@ -44,8 +44,10 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.loginRequest)
     .subscribe(data => { 
       if(data){
+        console.log('login')
+        console.log(data)
         this.isError = false;
-        this.route.navigateByUrl('/');
+        this.route.navigateByUrl('/home');
         this.toastr.success('Login Successful')
       }else {
         this.isError = true;

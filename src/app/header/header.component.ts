@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth/share/auth.service';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -10,43 +11,31 @@ import { AuthService } from '../auth/share/auth.service';
 })
 export class HeaderComponent implements OnInit {
 
-  isLogged;
+  isLoggedIn: boolean;
+  username:Observable<String>;
+
   headerForm:FormGroup;
-  films;
+
   constructor(private authService: AuthService, private route: Router) {
-    this.isLogged = true;
+    //this.isLogged = AuthService.logged;
    }
 
   ngOnInit(): void {
+
+    this.authService.loggedIn.subscribe((data: boolean) => this.isLoggedIn = data);
+    this.isLoggedIn = this.authService.isLoggedIn();
+    
     this.headerForm = new FormGroup({
       selector: new FormControl('Search By',Validators.required),
       search : new FormControl('')
     });
-  }valida
-getFilms(){
-console.log(this.headerForm.get('selector')?.value);
-console.log(this.headerForm.get('search')?.value);
-switch (this.headerForm.get('selector')?.value) {
-  case '1':
-    this.authService.getFilmsByTitle(this.headerForm.get('search')?.value,0,2).subscribe(data =>{
-      this.films=data;
-    });
-    break;
-  
-  case '2':
-    this.authService.getFilmsByCategory(this.headerForm.get('search')?.value,0,2).subscribe(data =>{
-      this.films=data;
-    });
-    break;
-  case '3':
-    this.authService.getFilmsByAuthor(this.headerForm.get('search')?.value,0,2).subscribe(data =>{
-      this.films=data;
-    });
-    break;
+  }
+  logout(){
+     this.authService.logout();
+     console.log("logout");
 
-  default:
-    break;
-}
-//this.route.
-}
+    }
+  onloggin(){
+    this.isLoggedIn=true;
+  }
 }

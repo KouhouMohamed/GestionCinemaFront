@@ -1,0 +1,39 @@
+<div class="container">
+  <div *ngIf = "hasUsers" class="row">
+    <div class="col-8">
+      	<div class="row" >
+        <div class="col-sm card" *ngFor = "let user of this.users" style="width: 18rem; margin-right: 5px; background-color: #F0F8FF;">
+          <img src="https://bootdey.com/img/Content/avatar/avatar7.png" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 style="text-transform:uppercase" class="card-title"><strong>{{user.first_name}} {{user.last_name}}</strong></h5>
+            <a (click)="showUserInfo(user)" class="btn btn-primary">Show user</a>
+          </div>
+      </div>
+    </div>
+    </div>
+    <div *ngIf ="inDemande" class="col-4">
+        <div class="card">
+                <div  class="card-body">
+                  <div class="d-flex flex-column align-items-center text-center">
+                    <span (click)="closeUserInfo()" class="float-right mr-2 close">&times;</span>
+                    <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
+
+                    <div class="mt-3">
+                      <h4>{{this.demandedUser.first_name}} {{this.demandedUser.last_name}}</h4>
+                      <p class="text-secondary mb-1">{{this.demandedUser.email}}</p>
+                      <!--
+                      <p class="text-muted font-size-sm">Street {{this.userAddress.street}}, {{this.userAddress.number}} {{this.userAddress.city}}, {{this.userAddress.zip_code}}, Maroc</p>
+                    -->
+                      <button *ngIf="!this.userBlock" style="margin-right: 5px;" class="btn btn-outline-danger" (click)="blockUser(this.demandedUser)">Block</button>
+                      <button *ngIf="this.userBlock" style="margin-right: 5px;" class="btn btn-outline-success" (click)="blockUser(this.demandedUser)">Unblock</button>
+                      <button style="margin-left: 5px;" class="btn btn-outline-primary">Message</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+    </div>
+  </div>
+  <div *ngIf="!hasUsers" class="no-users alert alert-info" role="alert">
+  No Users are founded!
+</div>
+</div>
